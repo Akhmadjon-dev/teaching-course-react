@@ -26,10 +26,13 @@ class App extends Component {
   render() {
     const { incrementCounter, decrementCounter } = this;
     const { counter } = this.state;
+
     return (
       <React.Fragment>
         <h2>Counter :</h2>
+
         <p>{counter}</p>
+
         <button onClick={incrementCounter}>+</button>
         <button onClick={decrementCounter}>-</button>
       </React.Fragment>

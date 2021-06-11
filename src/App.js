@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import fakeData from "./db/movie";
+import likeImg from "./assets/imgs/like.png";
+import dislikeImg from "./assets/imgs/dislike.png";
+
+import "./style/app.css";
 
 class App extends Component {
   constructor(props) {
@@ -6,14 +11,14 @@ class App extends Component {
 
     this.state = {
       counter: 1,
+      movies: fakeData,
     };
-    // this.incrementCounter = this.incrementCounter.bind(this);
-    // this.decrementCounter = this.decrementCounter.bind(this);
   }
 
   // event Handlers
 
-  incrementCounter = () => {
+  incrementCounter = (text) => {
+    console.log(text);
     const { counter } = this.state;
     this.setState({ counter: counter + 1 });
   };
@@ -23,18 +28,57 @@ class App extends Component {
     this.setState({ counter: counter - 1 });
   };
 
-  render() {
-    const { incrementCounter, decrementCounter } = this;
-    const { counter } = this.state;
+  deleteHandler = (id) => {
+    const movies = this.state.movies.filter((item) => item.id !== id);
+    this.setState({
+      movies,
+    });
+  };
 
+  render() {
+    const { movies } = this.state;
     return (
       <React.Fragment>
-        <h2>Counter :</h2>
-
-        <p>{counter}</p>
-
-        <button onClick={incrementCounter}>+</button>
-        <button onClick={decrementCounter}>-</button>
+        {movies.length ? (
+          <>
+            <h3>Movies list {movies.length} </h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Genre</th>
+                  <th>Stoke</th>
+                  <th>Rate</th>
+                  <th>IsLike</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {movies.map((item, index) => (
+                  <tr key={item.id || index}>
+                    <td>{item.title}</td>
+                    <td>{item.genre}</td>
+                    <td>{item.stock}</td>
+                    <td>{item.rate}</td>
+                    <td>
+                      <img
+                        src={item.isLike ? likeImg : dislikeImg}
+                        alt="like-img"
+                      />
+                    </td>
+                    <td>
+                      <button onClick={() => this.deleteHandler(item.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        ) : (
+          <h3>No Movies</h3>
+        )}
       </React.Fragment>
     );
   }

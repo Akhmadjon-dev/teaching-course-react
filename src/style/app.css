@@ -1,0 +1,20 @@
+body{
+    background-color: #f5f5f5;
+    padding: 10px 50px;
+}
+
+.title{
+    background-color: aquamarine;
+    font-size: 24px;
+}
+.active{
+    color: rgb(241, 64, 188);
+}
+
+p{
+    font-size: 14px;
+}
+li{
+    display: flex;
+}
+

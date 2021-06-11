@@ -15,17 +15,22 @@ class App extends Component {
     };
   }
 
-  // event Handlers
+  // likeHandler = (id) => {
+  //   const { movies } = this.state;
+  //   const movie = movies.find((item) => item.id === id);
+  //   const index = movies.findIndex((item) => item === movie);
+  //   movie.isLike = movie.isLike ? false : true;
 
-  incrementCounter = (text) => {
-    console.log(text);
-    const { counter } = this.state;
-    this.setState({ counter: counter + 1 });
-  };
+  //   const updatedMovie = movies.slice(index);
+  //   this.setState({ movie: updatedMovie });
+  // };
 
-  decrementCounter = () => {
-    const { counter } = this.state;
-    this.setState({ counter: counter - 1 });
+  likeHandler = (id) => {
+    const movies = this.state.movies.map((item) =>
+      item.id === id ? { ...item, isLike: !item.isLike } : item
+    );
+
+    this.setState({ movies });
   };
 
   deleteHandler = (id) => {
@@ -37,6 +42,7 @@ class App extends Component {
 
   render() {
     const { movies } = this.state;
+    console.log(movies);
     return (
       <React.Fragment>
         {movies.length ? (
@@ -60,7 +66,7 @@ class App extends Component {
                     <td>{item.genre}</td>
                     <td>{item.stock}</td>
                     <td>{item.rate}</td>
-                    <td>
+                    <td onClick={() => this.likeHandler(item.id)}>
                       <img
                         src={item.isLike ? likeImg : dislikeImg}
                         alt="like-img"

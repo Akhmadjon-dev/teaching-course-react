@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import likeImg from "../assets/imgs/like.png";
 import dislikeImg from "../assets/imgs/dislike.png";
+
 export default class Movies extends Component {
   constructor(props) {
     super(props);

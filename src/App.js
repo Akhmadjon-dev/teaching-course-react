@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import fakeData from "./db/movie";
-import likeImg from "./assets/imgs/like.png";
-import dislikeImg from "./assets/imgs/dislike.png";
 import Movies from "./components/Movies";
 import "./style/app.css";
 
@@ -38,7 +36,11 @@ class App extends Component {
         {movies.length ? (
           <>
             <h3>Movies list {movies.length} </h3>
-            <Movies />
+            <Movies
+              data={movies}
+              deleteHandler={this.deleteHandler}
+              likeHandler={this.likeHandler}
+            />
           </>
         ) : (
           <h3>No Movies</h3>

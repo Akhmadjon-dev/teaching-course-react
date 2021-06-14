@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import fakeData from "./db/movie";
 import Movies from "./components/Movies";
+import Navbar from "./components/Navbar";
 import "./style/app.css";
 
 class App extends Component {
@@ -35,7 +36,7 @@ class App extends Component {
       <React.Fragment>
         {movies.length ? (
           <>
-            <h3>Movies list {movies.length} </h3>
+            <Navbar movies={movies} />
             <Movies
               data={movies}
               deleteHandler={this.deleteHandler}

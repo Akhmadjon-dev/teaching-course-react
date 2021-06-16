@@ -7,11 +7,11 @@ export default class Movies extends Component {
     // console.log("moveis didmounted");
   }
 
-  componentDidUpdate(prevPros) {
-    if (this.props.data.length !== prevPros.data.length) {
-      console.log("movie listdan bitta movie deleted");
-    }
-  }
+  // componentDidUpdate(prevPros) {
+  //   if (this.props.data.length !== prevPros.data.length) {
+  //     console.log("movie listdan bitta movie deleted");
+  //   }
+  // }
   render() {
     const { deleteHandler, likeHandler, data: movies } = this.props;
     // console.log("movies render boldi");

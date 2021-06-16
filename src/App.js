@@ -11,7 +11,15 @@ class App extends Component {
     this.state = {
       counter: 1,
       movies: fakeData,
+      users: [],
     };
+  }
+
+  async componentDidMount() {
+    const data = await fetch("https://jsonplaceholder.typicode.com/users");
+    const users = await data.json();
+    this.setState({ users });
+    // console.log("app js didmount", users);
   }
 
   likeHandler = (id) => {
@@ -30,13 +38,13 @@ class App extends Component {
   };
 
   render() {
-    const { movies } = this.state;
-    console.log(movies);
+    const { movies, users } = this.state;
+    // console.log("app js render boldi user: ", this.state.users);
     return (
       <React.Fragment>
         {movies.length ? (
           <>
-            <Navbar movies={movies} />
+            <Navbar movies={movies} users={users} />
             <Movies
               data={movies}
               deleteHandler={this.deleteHandler}

@@ -3,10 +3,18 @@ import TableHeader from "./TableHeader";
 import Movie from "./Movie";
 
 export default class Movies extends Component {
-  render() {
-    // const { movies } = this.state;
-    const { deleteHandler, likeHandler, data: movies } = this.props;
+  componentDidMount() {
+    // console.log("moveis didmounted");
+  }
 
+  componentDidUpdate(prevPros) {
+    if (this.props.data.length !== prevPros.data.length) {
+      console.log("movie listdan bitta movie deleted");
+    }
+  }
+  render() {
+    const { deleteHandler, likeHandler, data: movies } = this.props;
+    // console.log("movies render boldi");
     return (
       <div>
         <table>
@@ -25,6 +33,7 @@ export default class Movies extends Component {
           <tbody>
             {movies.map((item, index) => (
               <Movie
+                key={item.id || index}
                 deleteHandler={deleteHandler}
                 likeHandler={likeHandler}
                 item={item}

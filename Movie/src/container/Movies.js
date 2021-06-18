@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import TableHeader from "./TableHeader";
-import Movie from "./Movie";
+import TableHeader from "../components/TableHeader";
+import Movie from "../components/Movie";
 
 export default class Movies extends Component {
-  componentDidMount() {
-    // console.log("moveis didmounted");
-  }
+  componentDidMount() {}
 
-  // componentDidUpdate(prevPros) {
-  //   if (this.props.data.length !== prevPros.data.length) {
-  //     console.log("movie listdan bitta movie deleted");
-  //   }
-  // }
   render() {
     const { deleteHandler, likeHandler, data: movies } = this.props;
-    // console.log("movies render boldi");
+
     return (
       <div>
         <table>

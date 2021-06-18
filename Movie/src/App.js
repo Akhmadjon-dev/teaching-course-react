@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import fakeData from "./db/movie";
-import Movies from "./components/Movies";
+import Movies from "./container/Movies";
 import Navbar from "./components/Navbar";
 import "./style/app.css";
 
@@ -10,7 +10,7 @@ class App extends Component {
 
     this.state = {
       counter: 1,
-      movies: [],
+      movies: fakeData,
       users: [],
     };
   }
@@ -19,14 +19,12 @@ class App extends Component {
     const data = await fetch("https://jsonplaceholder.typicode.com/users");
     const users = await data.json();
     this.setState({ users, movies: fakeData });
-    // console.log("app js didmount", users);
   }
 
   likeHandler = (id) => {
     const movies = this.state.movies.map((item) =>
       item.id === id ? { ...item, isLike: !item.isLike } : item
     );
-
     this.setState({ movies });
   };
 
@@ -39,7 +37,7 @@ class App extends Component {
 
   render() {
     const { movies, users } = this.state;
-    // console.log("app js render boldi user: ", this.state.users);
+
     return (
       <React.Fragment>
         {movies.length ? (

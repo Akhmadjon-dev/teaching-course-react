@@ -62,3 +62,11 @@ body {
     height: 40px;
     cursor: pointer;
   }
+
+  .d__flex{
+    display: flex;
+  }
+  .jc__space-between{
+    justify-content: space-between;
+  }
+  

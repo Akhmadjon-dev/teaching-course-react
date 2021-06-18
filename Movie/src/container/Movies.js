@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import TableHeader from "../components/TableHeader";
 import Movie from "../components/Movie";
 import Update from "../components/UpdateMovie";
+import Add from "../components/AddMovie";
+import Switch from "../components/Switch";
 
 export default class Movies extends Component {
   state = {
@@ -11,11 +13,18 @@ export default class Movies extends Component {
 
   render() {
     const { isUpdate } = this.state;
-    const { deleteHandler, likeHandler, data: movies } = this.props;
+    const { deleteHandler, likeHandler, data: movies, addMovie } = this.props;
 
     return (
-      <div>
-        {isUpdate && <Update />}
+      <div className="movies">
+        <div className="movies__header d__flex jc__space-between">
+          <h2>Handle switch</h2>
+          <Switch
+            switchHandler={() => this.setState({ isUpdate: !isUpdate })}
+            isUpdate={isUpdate}
+          />
+        </div>
+        {isUpdate && <Add addMovie={addMovie} />}
         <table>
           <TableHeader>
             <thead>

@@ -35,6 +35,11 @@ class App extends Component {
     });
   };
 
+  addNewMovie = (e) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   render() {
     const { movies, users } = this.state;
 
@@ -44,6 +49,7 @@ class App extends Component {
           <>
             <Navbar movies={movies} users={users} />
             <Movies
+              addMovie={this.addNewMovie}
               data={movies}
               deleteHandler={this.deleteHandler}
               likeHandler={this.likeHandler}

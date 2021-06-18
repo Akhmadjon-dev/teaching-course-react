@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import TableHeader from "../components/TableHeader";
 import Movie from "../components/Movie";
+import Update from "../components/UpdateMovie";
 
 export default class Movies extends Component {
+  state = {
+    isUpdate: false,
+  };
   componentDidMount() {}
 
   render() {
+    const { isUpdate } = this.state;
     const { deleteHandler, likeHandler, data: movies } = this.props;
 
     return (
       <div>
+        {isUpdate && <Update />}
         <table>
           <TableHeader>
             <thead>

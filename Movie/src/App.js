@@ -12,6 +12,14 @@ class App extends Component {
       counter: 1,
       movies: fakeData,
       users: [],
+      name: "",
+      age: "",
+      phone: "",
+      user: {
+        name: "",
+        age: "",
+        phone: "",
+      },
     };
   }
 
@@ -40,12 +48,46 @@ class App extends Component {
     console.log(e);
   };
 
+  inputHandler = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  submitHandler = (e) => {
+    e.preventDefault();
+    const { name, age, phone } = this.state;
+    const newUser = { name, age, phone };
+    console.log(newUser);
+  };
+
   render() {
-    const { movies, users } = this.state;
+    console.log(this.state);
+    const { movies, users, name, age, phone } = this.state;
 
     return (
       <React.Fragment>
-        {movies.length ? (
+        <form onSubmit={this.submitHandler}>
+          <input
+            type="text"
+            value={name}
+            onChange={this.inputHandler}
+            name="name"
+          />
+          <input
+            type="age"
+            value={age}
+            onChange={this.inputHandler}
+            name="age"
+          />
+          <input
+            type="phone"
+            value={phone}
+            onChange={this.inputHandler}
+            name="phone"
+          />
+          <button>Send</button>
+        </form>
+        {/* {movies.length ? (
           <>
             <Navbar movies={movies} users={users} />
             <Movies
@@ -57,7 +99,7 @@ class App extends Component {
           </>
         ) : (
           <h3>No Movies</h3>
-        )}
+        )} */}
       </React.Fragment>
     );
   }

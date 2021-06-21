@@ -13,7 +13,14 @@ export default class Movies extends Component {
 
   render() {
     const { isUpdate } = this.state;
-    const { deleteHandler, likeHandler, data: movies, addMovie } = this.props;
+    const {
+      deleteHandler,
+      likeHandler,
+      data: movies,
+      addMovie,
+      inputHandler,
+      movie,
+    } = this.props;
 
     return (
       <div className="movies">
@@ -24,7 +31,9 @@ export default class Movies extends Component {
             isUpdate={isUpdate}
           />
         </div>
-        {isUpdate && <Add addMovie={addMovie} />}
+        {isUpdate && (
+          <Add addMovie={addMovie} data={movie} inputHandler={inputHandler} />
+        )}
         <table>
           <TableHeader>
             <thead>

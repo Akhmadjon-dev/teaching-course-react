@@ -4,9 +4,6 @@ import likeImg from "../assets/img/like.png";
 import dislikeImg from "../assets/img/dislike.png";
 
 export default class Movie extends Component {
-  componentWillUnmount() {
-    console.log("movie willunmounted", this.props.item.title);
-  }
   render() {
     const { item, id: index, likeHandler, deleteHandler } = this.props;
     // console.log("movie rendered");

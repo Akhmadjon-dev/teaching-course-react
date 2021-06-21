@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import fakeData from "./db/movie";
 import Movies from "./container/Movies";
+import Input from "./components/Form/Input";
 import Navbar from "./components/Navbar";
 import "./style/app.css";
 
@@ -12,13 +13,12 @@ class App extends Component {
       counter: 1,
       movies: fakeData,
       users: [],
-      name: "",
-      age: "",
-      phone: "",
-      user: {
-        name: "",
-        age: "",
-        phone: "",
+      movie: {
+        title: "",
+        rate: "",
+        stock: "",
+        isLike: false,
+        genre: "",
       },
     };
   }
@@ -43,14 +43,28 @@ class App extends Component {
     });
   };
 
+  inputHandler = (e) => {
+    const { name, value } = e.target;
+    // console.log(name, value);
+    this.setState((prev) => ({
+      movie: {
+        ...prev.movie,
+        [name]: name === "isLike" ? value : value,
+      },
+    }));
+  };
+
   addNewMovie = (e) => {
     e.preventDefault();
+
+    this.setState((prev) => ({
+      movies: [{ ...prev.movie, id: prev.movies.length + 1 }, ...prev.movies],
+    }));
     console.log(e);
   };
 
-  inputHandler = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  counterHandler = () => {
+    this.setState((prevState) => ({ counter: prevState.counter + 1 }));
   };
 
   submitHandler = (e) => {
@@ -62,32 +76,11 @@ class App extends Component {
 
   render() {
     console.log(this.state);
-    const { movies, users, name, age, phone } = this.state;
+    const { movies, users, movie } = this.state;
 
     return (
       <React.Fragment>
-        <form onSubmit={this.submitHandler}>
-          <input
-            type="text"
-            value={name}
-            onChange={this.inputHandler}
-            name="name"
-          />
-          <input
-            type="age"
-            value={age}
-            onChange={this.inputHandler}
-            name="age"
-          />
-          <input
-            type="phone"
-            value={phone}
-            onChange={this.inputHandler}
-            name="phone"
-          />
-          <button>Send</button>
-        </form>
-        {/* {movies.length ? (
+        {movies.length ? (
           <>
             <Navbar movies={movies} users={users} />
             <Movies
@@ -95,11 +88,13 @@ class App extends Component {
               data={movies}
               deleteHandler={this.deleteHandler}
               likeHandler={this.likeHandler}
+              inputHandler={this.inputHandler}
+              movie={movie}
             />
           </>
         ) : (
           <h3>No Movies</h3>
-        )} */}
+        )}
       </React.Fragment>
     );
   }

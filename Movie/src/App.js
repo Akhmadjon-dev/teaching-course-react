@@ -49,7 +49,7 @@ class App extends Component {
     this.setState((prev) => ({
       movie: {
         ...prev.movie,
-        [name]: name === "isLike" ? value : value,
+        [name]: value === "true" ? true : value === "false" ? false : value,
       },
     }));
   };

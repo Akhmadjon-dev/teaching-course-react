@@ -6,19 +6,39 @@ export default class SignIn extends Component {
     user: {
       email: "",
       password: "",
+      isAgree: null,
     },
   };
 
   inputHandler = (e) => {
-    console.log(e.target);
+    const { name, value } = e.target;
+    this.setState((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: value,
+      },
+    }));
+  };
+
+  checkboxHandler = (e) => {
+    const { checked, name } = e.target;
+    this.setState((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: checked,
+      },
+    }));
   };
 
   submitHandler = (e) => {
     e.preventDefault();
-    console.log("form submitted");
+    console.log("form submitted", this.state.user);
   };
 
   render() {
+    const { email, password, isAgree } = this.state;
     return (
       <Form onSubmit={this.submitHandler}>
         <Form.Group controlId="formBasicEmail">
@@ -26,6 +46,8 @@ export default class SignIn extends Component {
           <Form.Control
             onChange={this.inputHandler}
             type="email"
+            name="email"
+            value={email}
             placeholder="Enter email"
           />
         </Form.Group>
@@ -34,6 +56,8 @@ export default class SignIn extends Component {
           <Form.Label>Password</Form.Label>
           <Form.Control
             onChange={this.inputHandler}
+            name="password"
+            value={password}
             type="password"
             placeholder="Password"
           />
@@ -41,9 +65,11 @@ export default class SignIn extends Component {
 
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check
-            onChange={this.inputHandler}
+            onChange={this.checkboxHandler}
             type="checkbox"
-            label="Check me out"
+            name="isAgree"
+            checked={isAgree}
+            label="Do you agree?"
           />
         </Form.Group>
 

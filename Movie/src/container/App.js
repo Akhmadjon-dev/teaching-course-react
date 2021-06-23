@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import fakeData from "./db/movie";
-import Movies from "./container/Movies";
-import Input from "./components/Form/Input";
-import Navbar from "./components/Navbar";
-import "./style/app.css";
+import fakeData from "../db/movie";
+import Movies from "./Movie/Movies";
+import Input from "../components/Form/Input";
+import Navbar from "../components/Navbar";
+import "../style/app.css";
 
 class App extends Component {
   constructor(props) {

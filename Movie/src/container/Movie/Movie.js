@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import likeImg from "../assets/img/like.png";
-import dislikeImg from "../assets/img/dislike.png";
+import likeImg from "../../assets/img/like.png";
+import dislikeImg from "../../assets/img/dislike.png";
 
 export default class Movie extends Component {
   render() {

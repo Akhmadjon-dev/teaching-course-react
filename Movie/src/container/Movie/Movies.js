@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import TableHeader from "../components/TableHeader";
-import Movie from "../components/Movie";
-import Update from "../components/UpdateMovie";
-import Add from "../components/AddMovie";
-import Switch from "../components/Switch";
+import TableHeader from "../../components/TableHeader";
+import Movie from "./Movie";
+import Update from "./UpdateMovie";
+import Add from "./AddMovie";
+import Switch from "../../components/Switch";
 
 export default class Movies extends Component {
   state = {

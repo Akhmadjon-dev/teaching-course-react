@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
+import Input from "./Input";
 
 export default class SignIn extends Component {
   state = {
@@ -41,37 +42,29 @@ export default class SignIn extends Component {
     const { email, password, isAgree } = this.state;
     return (
       <Form onSubmit={this.submitHandler}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            onChange={this.inputHandler}
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter email"
-          />
-        </Form.Group>
+        <Input
+          name="email"
+          value={email}
+          handler={this.inputHandler}
+          type="email"
+          label="Enter your email"
+        />
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={this.inputHandler}
-            name="password"
-            value={password}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check
-            onChange={this.checkboxHandler}
-            type="checkbox"
-            name="isAgree"
-            checked={isAgree}
-            label="Do you agree?"
-          />
-        </Form.Group>
+        <Input
+          name="password"
+          value={password}
+          handler={this.inputHandler}
+          type="password"
+          label="Enter your password"
+        />
+        <Input
+          name="isAgree"
+          value={isAgree}
+          handler={this.checkboxHandler}
+          type="checkbox"
+          label="Do you agree?"
+          isCheckbox
+        />
 
         <Button variant="primary" type="submit">
           Submit

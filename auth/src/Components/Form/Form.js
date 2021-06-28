@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
+import Joi from "joi-browser";
 import Input from "./Input";
 
 export default class SignIn extends Component {
@@ -16,13 +17,17 @@ export default class SignIn extends Component {
     },
   };
 
+  schema = {
+    email: Joi.string().required().label("Email"),
+    password: Joi.string().required().label("Password"),
+  };
+
   validateProperty = ({ name, value }) => {
-    if (name === "email") {
-      if (value.trim() === "") return "Email is required";
-    }
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required";
-    }
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema);
+
+    return error ? error.details[0].message : null;
   };
 
   inputHandler = ({ target }) => {
@@ -56,15 +61,27 @@ export default class SignIn extends Component {
     }));
   };
 
+  validate = () => {
+    const { error } = Joi.validate(this.state.user, this.schema, {
+      abortEarly: false,
+    });
+    if (!error) return null;
+
+    const errors = {};
+    for (let item of error.details) {
+      errors[item.path[0]] = item.message;
+    }
+
+    console.log(error.details);
+    return errors;
+  };
+
   submitHandler = (e) => {
     e.preventDefault();
-    const errors = {};
-    const { user } = this.state;
-    if (user.email.trim() === "") errors.email = "Email talab qilinadi";
-    if (user.password.trim() === "") errors.password = "Password ni kiriting";
-    if (!user.isAgree) errors.isAgree = "Iltimos belgilang";
+    const errors = this.validate();
 
     this.setState({ errors: errors || {} });
+    if (errors) return;
 
     console.log("form submitted", this.state.user);
   };

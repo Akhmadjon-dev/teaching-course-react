@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 
-const Input = ({ name, type, label, handler, value, isCheckbox }) => {
+const Input = ({ name, type, label, handler, value, isCheckbox, error }) => {
   if (isCheckbox) {
     return (
       <Form.Group controlId="formBasicCheckbox">
@@ -12,6 +12,7 @@ const Input = ({ name, type, label, handler, value, isCheckbox }) => {
           checked={value}
           label={label}
         />
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </Form.Group>
     );
   } else {
@@ -25,6 +26,7 @@ const Input = ({ name, type, label, handler, value, isCheckbox }) => {
           value={value}
           placeholder={label}
         />
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </Form.Group>
     );
   }

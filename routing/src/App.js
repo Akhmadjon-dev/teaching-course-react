@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import Form from "./components/Form";
+import Header from "./components/Header";
+import Home from "./components/Home";
 import List from "./components/List";
+import User from "./components/User";
 
 export default class App extends Component {
   constructor(props) {
@@ -65,8 +69,27 @@ export default class App extends Component {
     const { users } = this.state;
     return (
       <div className="app">
-        <Form submitHandler={this.submitHandler} handler={this.inputHandler} />
-        <List data={users} />
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/add"
+            render={(props) => (
+              <Form
+                {...props}
+                submitHandler={this.submitHandler}
+                handler={this.inputHandler}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/users"
+            render={(props) => <List {...props} data={users} />}
+          />
+          <Route path="/user/:id" component={User} />
+        </Switch>
       </div>
     );
   }

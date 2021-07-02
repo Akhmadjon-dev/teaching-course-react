@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Button, Table } from "react-bootstrap";
-import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
+import { AiFillEdit, AiOutlineDelete, AiOutlineFundView } from "react-icons/ai";
 
 export default class List extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  routeHandler = (id) => {
+    this.props.history.push(`/user/${id}`);
+  };
 
   render() {
     const { data } = this.props;
@@ -36,8 +40,11 @@ export default class List extends Component {
                 <td>{user.company.name}</td>
                 <td>{user.address.city}</td>
                 <td>
-                  <Button style={{ marginRight: "8px" }}>
-                    <AiFillEdit />
+                  <Button
+                    onClick={() => this.routeHandler(user.id)}
+                    style={{ marginRight: "8px" }}
+                  >
+                    <AiOutlineFundView />
                   </Button>
                   <Button>
                     <AiOutlineDelete />

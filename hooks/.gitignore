@@ -2,10 +2,6 @@
 
 # dependencies
 /node_modules
-/Movie/node_modules
-/auth/node_modules
-/hooks/node_modules
-/routing/node_modules
 /.pnp
 .pnp.js
 

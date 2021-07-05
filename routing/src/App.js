@@ -1,10 +1,12 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { Component, createRef } from "react";
+import { Link, Redirect, Route, Switch } from "react-router-dom";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import List from "./components/List";
+import Search from "./components/Search";
 import User from "./components/User";
+import { Main, Section } from "./styles";
 
 export default class App extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ export default class App extends Component {
         },
       },
     };
+    this.linkRef = createRef();
   }
 
   // lifecycle
@@ -35,19 +38,7 @@ export default class App extends Component {
 
   inputHandler = (e) => {
     const { name, value } = e.target;
-    // if(name==='companyName'){
-    //   this.setState((prevState) => ({
-    //     user: {
-    //       ...prevState.user,
-    //       address: {
-    //         ...prevState.address,
 
-    //       }
-
-    //     },
-    //   }));
-    // }else{
-    // }
     this.setState((prevState) => ({
       user: {
         ...prevState.user,
@@ -61,36 +52,42 @@ export default class App extends Component {
     const { user } = this.state;
     this.setState((prev) => ({
       users: [{ ...user, id: Date.now() }, ...prev.users],
+      user: {},
     }));
+    this.linkRef.current.click();
   };
 
   render() {
-    console.log(this.state);
     const { users } = this.state;
     return (
-      <div className="app">
+      <Main>
         <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route
-            exact
-            path="/add"
-            render={(props) => (
-              <Form
-                {...props}
-                submitHandler={this.submitHandler}
-                handler={this.inputHandler}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/users"
-            render={(props) => <List {...props} data={users} />}
-          />
-          <Route path="/user/:id" component={User} />
-        </Switch>
-      </div>
+        <Section>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/users/search" component={Search} />
+            <Route
+              exact
+              path="/add"
+              render={(props) => (
+                <Form
+                  {...props}
+                  submitHandler={this.submitHandler}
+                  handler={this.inputHandler}
+                />
+              )}
+            />
+            <Route exact path="/users/:id" component={User} />
+            <Route
+              exact
+              path="/users"
+              render={(props) => <List {...props} data={users} />}
+            />
+            <Route exact path="/not-found" render={() => <h2>Not found</h2>} />
+            <Redirect to="/not-found" />
+          </Switch>
+        </Section>
+      </Main>
     );
   }
 }

@@ -2,7 +2,11 @@ import React, { Component } from "react";
 
 export default class User extends Component {
   state = {
-    user: {},
+    user: {
+      address: {
+        city: "",
+      },
+    },
   };
 
   async componentDidMount() {
@@ -15,11 +19,13 @@ export default class User extends Component {
   }
 
   render() {
-    console.log(this.state.user);
     const { user } = this.state;
+
     return (
       <>
         <h2>Name {user.name}</h2>
+        <h2>phone {user.phone}</h2>
+        <h2>city {user.address.city}</h2>
       </>
     );
   }

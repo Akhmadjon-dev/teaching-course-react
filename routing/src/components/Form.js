@@ -1,21 +1,29 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FlexWrap } from "../styles";
 
 export default class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.ref = React.createRef();
+  }
+
+  componentDidMount() {
+    this.ref.current.focus();
   }
 
   render() {
     const { handler, submitHandler } = this.props;
     return (
-      <>
+      <FlexWrap ai="flex-start" jc="space-around" style={{ width: "100%" }}>
         <h2>Add User</h2>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>User Name</Form.Label>
             <Form.Control
+              ref={this.ref}
               onChange={handler}
               type="text"
               name="username"
@@ -77,7 +85,7 @@ export default class Add extends Component {
             Submit
           </Button>
         </Form>
-      </>
+      </FlexWrap>
     );
   }
 }

@@ -9,7 +9,7 @@ export default class List extends Component {
   }
 
   routeHandler = (id) => {
-    this.props.history.push(`/user/${id}`);
+    this.props.history.push(`/users/${id}`);
   };
 
   render() {
@@ -37,8 +37,8 @@ export default class List extends Component {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
-                <td>{user.company.name}</td>
-                <td>{user.address.city}</td>
+                <td>{user.company?.name}</td>
+                <td>{user.address?.city}</td>
                 <td>
                   <Button
                     onClick={() => this.routeHandler(user.id)}
